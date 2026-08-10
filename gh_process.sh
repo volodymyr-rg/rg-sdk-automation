@@ -73,10 +73,10 @@ inject() {
   INJECTOR_DIR="$SRC/rg_sdk_updater/"
 
   compiled () {
-    if [[ "$INJECTOR_DIR/Injector.class" -nt "$INJECTOR_DIR/Injector.java" ]]
-    then
-      echo "Already compiled..."
-    fi
+#    if [[ "$INJECTOR_DIR/Injector.class" -nt "$INJECTOR_DIR/Injector.java" ]]
+#    then
+#      echo "Already compiled..."
+#    fi
     cd "$INJECTOR_DIR"
     "$JAVAC" Injector.java
   }
@@ -98,6 +98,8 @@ inject() {
   }
 
   compiled
+
+  ls -l "$INJECTOR_DIR"
 
   # TODO call based on repo name
   run 'GatewayResponse.php'
