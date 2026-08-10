@@ -1,0 +1,42 @@
+name: Update target SDK
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: update-sdk-${{ github.event.pull_request.head.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update-sdk:
+    runs-on: ubuntu-latest
+    env:
+      TARGET_REPOSITORY: ${{ vars.TARGET_REPOSITORY }}
+      PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_TITLE: ${{ github.event.pull_request.title }}
+
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Check for SDK definition changes
+        id: changes
+        run: ./gh_check.sh "$PR_BASE_SHA" "$PR_HEAD_SHA"
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+
+      - name: Update target SDK repository
+        if: steps.changes.outputs.changed == 'true'
+        run: ./gh_process.sh "$TARGET_REPOSITORY"
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
