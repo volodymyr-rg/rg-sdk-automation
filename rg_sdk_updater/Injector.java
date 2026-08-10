@@ -18,8 +18,7 @@ public class Injector {
     try {
       System.out.print(inject(args));
     } catch (Exception ex) {
-      System.err.println("11111");
-      System.err.println(ex.getMessage());
+      System.err.println(ex);
       System.exit(1);
     }
   }
