@@ -1,4 +1,4 @@
-package rg_sdks_updater;
+package rg_sdk_updater;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

@@ -89,7 +89,7 @@ inject() {
 #  @depends_on compiled
   run() {
     local file="$1"
-    "$JAVA" -cp "$SRC" rg_sdks_updater.Injector \
+    "$JAVA" -cp "$SRC" rg_sdk_updater.Injector \
       '--- start response constants ---' \
       '--- end response constants ---' \
       "$SRC/response.md" \
