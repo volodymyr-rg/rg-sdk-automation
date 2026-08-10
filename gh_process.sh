@@ -94,7 +94,7 @@ inject() {
       '--- start response constants ---' \
       '--- end response constants ---' \
       "$SRC/response.md" \
-      "$TARGET/$file" > /tmp/delme
+      "$TARGET/$file" > /tmp/delme 2>&1
     echo "after"
     cat /tmp/delme
     mv /tmp/delme "$TARGET/$file"
