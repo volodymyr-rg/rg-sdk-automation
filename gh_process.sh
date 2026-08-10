@@ -73,10 +73,10 @@ inject() {
   INJECTOR_DIR="$SRC/rg_sdk_updater/"
 
   compiled () {
-#    if [[ "$INJECTOR_DIR/Injector.class" -nt "$INJECTOR_DIR/Injector.java" ]]
-#    then
-#      echo "Already compiled..."
-#    fi
+    if [[ "$INJECTOR_DIR/Injector.class" -nt "$INJECTOR_DIR/Injector.java" ]]
+    then
+      echo "Already compiled..."
+    fi
     cd "$INJECTOR_DIR"
     "$JAVAC" Injector.java
   }
@@ -89,7 +89,7 @@ inject() {
 #  @depends_on compiled
   run() {
     local file="$1"
-    "$JAVA" -cp "$INJECTOR_DIR" rg_sdks_updater.Injector \
+    "$JAVA" -cp "$SRC" rg_sdks_updater.Injector \
       '--- start response constants ---' \
       '--- end response constants ---' \
       "$SRC/response.md" \
