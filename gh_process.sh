@@ -89,19 +89,18 @@ inject() {
 #  @depends_on compiled
   run() {
     local file="$1"
+    echo "before"
     "$JAVA" -cp "$SRC" rg_sdk_updater.Injector \
       '--- start response constants ---' \
       '--- end response constants ---' \
       "$SRC/response.md" \
       "$TARGET/$file" > /tmp/delme
-      mv /tmp/delme "$TARGET/$file"
+    echo "after"
+    cat /tmp/delme
+    mv /tmp/delme "$TARGET/$file"
   }
 
   compiled
-
-  ls -l "$SRC"
-  echo ---
-  ls -l "$INJECTOR_DIR"
 
   # TODO call based on repo name
   run 'GatewayResponse.php'
