@@ -1,3 +1,4 @@
+
 # AUTH_NO
 
 Six digit code returned by the banking institution in response to successful auth-only, ticket, and purchase transactions.
