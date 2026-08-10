@@ -99,6 +99,8 @@ inject() {
 
   compiled
 
+  ls -l "$SRC"
+  echo ---
   ls -l "$INJECTOR_DIR"
 
   # TODO call based on repo name
