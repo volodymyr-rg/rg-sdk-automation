@@ -65,7 +65,7 @@ checkout_target_repository() {
 inject() {
   local target_directory=$1
 
-  JAVABIN='${JAVA_HOME_21_X64}/bin'
+  JAVABIN="${JAVA_HOME_21_X64}/bin"
   JAVA="$JAVABIN/java"
   JAVAC="$JAVABIN/javac"
   TARGET="$WORK_DIRECTORY/target"
