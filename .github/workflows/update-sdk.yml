@@ -36,6 +36,6 @@ jobs:
 
       - name: Update target SDK repository
         if: steps.changes.outputs.changed == 'true'
-        run: ./gh_process.sh 'rocketgate/rocketgate-php-sdk-clone'
+        run: ./gh_process.sh 'volodymyr-rg/rocketgate-php-sdk-clone'
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
