@@ -89,13 +89,14 @@ inject() {
 #  @depends_on compiled
   run() {
     local file="$1"
-    echo "before"
+    echo ---------------
+    cat "$TARGET/$file"
+    echo ---------------
     "$JAVA" -cp "$SRC" rg_sdk_updater.Injector \
       '--- start response constants ---' \
       '--- end response constants ---' \
       "$SRC/response.md" \
       "$TARGET/$file" > /tmp/delme
-    echo "after"
     cat /tmp/delme
     mv /tmp/delme "$TARGET/$file"
   }
