@@ -69,7 +69,8 @@ inject() {
   JAVA="$JAVABIN/java"
   JAVAC="$JAVABIN/javac"
   TARGET="$WORK_DIRECTORY/target"
-  INJECTOR_DIR="$SOURCE_REPOSITORY_ROOT/rg_sdk_updater/"
+  SRC="$SOURCE_REPOSITORY_ROOT"
+  INJECTOR_DIR="$SRC/rg_sdk_updater/"
 
   compiled () {
     if [[ "$INJECTOR_DIR/Injector.class" -nt "$INJECTOR_DIR/Injector.java" ]]
