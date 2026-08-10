@@ -63,7 +63,46 @@ checkout_target_repository() {
 
 # Run the SDK injector against the checked-out target repository.
 inject() {
-  printf 'Injector placeholder: no files changed in %s\n' "$target_directory"
+  local target_directory=$1
+
+  JAVABIN='${JAVA_HOME_21_X64}/bin'
+  JAVA="$JAVABIN/java"
+  JAVAC="$JAVABIN/javac"
+  TARGET="$WORK_DIRECTORY/target"
+  INJECTOR_DIR="$SOURCE_REPOSITORY_ROOT/rg_sdk_updater/"
+
+  compiled () {
+    if [[ "$INJECTOR_DIR/Injector.class" -nt "$INJECTOR_DIR/Injector.java" ]]
+    then
+      echo "Already compiled..."
+    fi
+    cd "$INJECTOR_DIR"
+    "$JAVAC" Injector.java
+  }
+
+#  @goal cleaned
+#    cd "$CODE"
+#    rm *.class
+
+#  @goal run @params SRC
+#  @depends_on compiled
+  run() {
+    local file="$1"
+    "$JAVA" -cp "$INJECTOR_DIR" rg_sdks_updater.Injector \
+      '--- start response constants ---' \
+      '--- end response constants ---' \
+      "$SRC/response.md" \
+      "$TARGET/$file" > /tmp/delme
+      mv /tmp/delme "$TARGET/$file"
+  }
+
+  # TODO call based on repo name
+  run 'GatewayResponse.php'
+
+#  @goal runall
+#    @depends_on run @args 'GatewayResponse.php'
+#    @depends_on run @args 'GatewayResponse.java'
+#    @depends_on run @args 'RocketGate.py'
 }
 
 # Commit and push all staged injector changes.
