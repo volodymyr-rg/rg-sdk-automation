@@ -5,8 +5,8 @@ For the implementation we only use Java SDK, no external dependencies.
 The program will accept the next CLI params:
 - start marker. Example: `/* --- start response constants --- */`
 - end marker. Example: `/* --- end response constants --- */`
-- data.md file path. Example: `src/main/java/rg_sdks_updater/response.md`
-- input source file path. Example: `src/main/java/rg_sdks_updater/GatewayResponse.java`
+- data.md file path. Example: `response.md`
+- input source file path. Example: `rg_sdk_updater/GatewayResponse.java`
 
 What the program will do:
 - read the data.md file

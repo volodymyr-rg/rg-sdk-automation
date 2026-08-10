@@ -1,4 +1,4 @@
-package rg_sdks_updater;
+package rg_sdk_updater;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +18,7 @@ public class Injector {
     try {
       System.out.print(inject(args));
     } catch (Exception ex) {
-      System.err.println(ex.getMessage());
+      System.err.println(ex);
       System.exit(1);
     }
   }

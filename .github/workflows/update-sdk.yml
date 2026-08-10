@@ -34,8 +34,14 @@ jobs:
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
 
-      - name: Update target SDK repository
+      - name: Update PHP SDK repository
         if: steps.changes.outputs.changed == 'true'
-        run: ./gh_process.sh 'rocketgate/rocketgate-php-sdk'
+        run: ./gh_process.sh 'volodymyr-rg/rocketgate-php-sdk-clone'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Update Python SDK repository
+        if: steps.changes.outputs.changed == 'true'
+        run: ./gh_process.sh 'volodymyr-rg/rocketgate-python-sdk-clone'
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
