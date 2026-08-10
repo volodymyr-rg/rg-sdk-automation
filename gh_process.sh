@@ -94,13 +94,15 @@ inject() {
       '--- start response constants ---' \
       '--- end response constants ---' \
       "$SRC/response.md" \
-      "$TARGET/$file" > /tmp/delme 2>&1
+      "$TARGET/$file" > /tmp/delme
     echo "after"
     cat /tmp/delme
     mv /tmp/delme "$TARGET/$file"
   }
 
   compiled
+
+  ls -l "$TARGET"
 
   # TODO call based on repo name
   run 'GatewayResponse.php'
