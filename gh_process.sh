@@ -96,6 +96,8 @@ inject() {
       mv /tmp/delme "$TARGET/$file"
   }
 
+  compiled
+
   # TODO call based on repo name
   run 'GatewayResponse.php'
 
