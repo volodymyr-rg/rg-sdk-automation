@@ -63,7 +63,8 @@ checkout_target_repository() {
 
 # Run the SDK injector against the checked-out target repository.
 inject() {
-  local target_directory=$1
+  local target_repo="$1"
+  local target_directory="$2"
 
   JAVABIN="${JAVA_HOME_21_X64}/bin"
   JAVA="$JAVABIN/java"
@@ -81,17 +82,12 @@ inject() {
     "$JAVAC" Injector.java
   }
 
-#  @goal cleaned
-#    cd "$CODE"
-#    rm *.class
-
-#  @goal run @params SRC
-#  @depends_on compiled
   run() {
     local file="$1"
-    echo ---------------
-    cat "$TARGET/$file"
-    echo ---------------
+    echo "Processing $file ..."
+#    echo ---------------
+#    cat "$TARGET/$file"
+#    echo ---------------
     "$JAVA" -cp "$SRC" rg_sdk_updater.Injector \
       '--- start response constants ---' \
       '--- end response constants ---' \
@@ -103,14 +99,13 @@ inject() {
 
   compiled
 
-  # TODO call based on repo name
-  run 'src/GatewayResponse.php'
-  #
-
-#  @goal runall
-#    @depends_on run @args 'GatewayResponse.php'
-#    @depends_on run @args 'GatewayResponse.java'
-#    @depends_on run @args 'RocketGate.py'
+  if [[ $target_repo == *php* ]]; then
+    run 'src/GatewayResponse.php'
+  elif [[ $target_repo == *python* ]]; then
+    run 'RocketGate.py'
+  else
+    die "unsupported target repository type: ${target_repo}"
+  fi
 }
 
 # Commit and push all staged injector changes.
@@ -181,7 +176,7 @@ process_repository() {
   [[ -n $default_branch ]] || die "could not determine default branch for ${target_repository}"
 
   checkout_target_repository "$target_repository" "$target_directory" "$PR_BRANCH"
-  inject "$target_directory"
+  inject "$target_repository" "$target_directory"
 
   git -C "$target_directory" add --all
   if git -C "$target_directory" diff --cached --quiet; then
