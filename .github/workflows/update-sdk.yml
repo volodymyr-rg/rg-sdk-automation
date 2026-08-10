@@ -16,7 +16,6 @@ jobs:
   update-sdk:
     runs-on: ubuntu-latest
     env:
-      TARGET_REPOSITORY: ${{ vars.TARGET_REPOSITORY }}
       PR_BRANCH: ${{ github.event.pull_request.head.ref }}
       PR_NUMBER: ${{ github.event.pull_request.number }}
       PR_TITLE: ${{ github.event.pull_request.title }}
@@ -37,6 +36,6 @@ jobs:
 
       - name: Update target SDK repository
         if: steps.changes.outputs.changed == 'true'
-        run: ./gh_process.sh "$TARGET_REPOSITORY"
+        run: ./gh_process.sh 'rocketgate/rocketgate-php-sdk'
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
