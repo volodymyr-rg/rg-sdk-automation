@@ -102,8 +102,6 @@ inject() {
 
   compiled
 
-#  ls -l "$TARGET"
-
   # TODO call based on repo name
   run 'src/GatewayResponse.php'
   #
