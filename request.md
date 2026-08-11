@@ -597,6 +597,7 @@ The transaction type or [GatewayService](https://help.rocketgate.com/support/sol
 | LOOKUP         | PerformLookup                             |
 | REBILL_CANCEL  | PerformRebillCancel                       |
 | REBILL_UPDATE  | PerformRebillUpdate                       |
+
 ** The CC_PURCHASE may be overridden if the option, [IovationAuthOnly](https://help.rocketgate.com/support/solutions/articles/28000003892--fraud-options-iovationauthonly), or [WhiteListAuthOnly](https://help.rocketgate.com/support/solutions/articles/28000016266-fraud-options-whitelistauthonly) is used.
 
 # THREATMETRIX_SESSION_ID
