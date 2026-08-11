@@ -40,7 +40,7 @@ Maximum length for this field is 32 characters.
 
 # BILLING_COUNTRY
 
-Customer’s billing country.  This element is optional but should be provided if Address Verification is enabled. If provided, the two-character BILLING_COUNTRY must comply with the ISO 3166-1 alpha-2 standards for country codes.
+Customer’s billing country.  This element is optional but should be provided if Address Verification is enabled. If provided, the two-character BILLING_COUNTRY must comply with [the ISO 3166-1 alpha-2 standards for country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 
 Maximum length for this field is 2 characters.
 
@@ -206,15 +206,15 @@ This element is required for all credit card transactions in which the CARDNO el
 
 The URL to receive the postback when the payment authorization is declined. This element is optional.
 
-This option is to be used in conjunction with the Build Payment Link API (simplified 3DS flow).
+This option is to be used in conjunction with the [Build Payment Link API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow).
 
-This value will override the pre-configured merchant option, HostedPageDeclinePostbackURL.
+This value will override the pre-configured merchant option, [HostedPageDeclinePostbackURL](https://help.rocketgate.com/support/solutions/articles/28000022694-hosted-page-hostedpagedeclinepostbackurl).
 
 # FAILURE_URL
 
 Redirect URL when the payment authorization failed. This element is optional.
 
-This option is to be used in conjunction with the Build Payment Link API (simplified 3DS flow).
+This option is to be used in conjunction with the [Build Payment Link API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow).
 
 This value will override the pre-configured merchant option, HostedPageFailureURL.
 
@@ -226,10 +226,11 @@ Set to TRUE, ON, or 1 to enable.
 
 The types of postbacks generated are as follows:
 
-Gateway API transactions flagged as joins or trials will be sent to the XsellPostbackURL.
-Any other type of gateway transaction will be sent to the RebillPostbackURL.
-If GENERATE_POSTBACK is used with the RocketGate Embedded Fields integration, a hosted page postback will be sent.  
-GOOGLE_PAY_TOKEN
+- Gateway API transactions flagged as joins or trials will be sent to the [XsellPostbackURL](https://help.rocketgate.com/support/solutions/articles/28000015487-hosted-page-xsellpostbackurl).
+- Any other type of gateway transaction will be sent to the [RebillPostbackURL](https://help.rocketgate.com/support/solutions/articles/28000015485-hosted-page-rebillpostbackurl).
+- If GENERATE_POSTBACK is used with the [RocketGate Embedded Fields integration](https://help.rocketgate.com/support/solutions/articles/28000029290-ajax-embedded-fields-programmer-s-guide-v1-3-), a [hosted page postback](https://help.rocketgate.com/support/solutions/articles/28000006675-hostedpage-postback) will be sent.  
+
+# GOOGLE_PAY_TOKEN
 
 When the payment method is Google Pay, GOOGLE_PAY_TOKEN represents the token that the customer selected to pay with from their Google Pay account.
 
@@ -259,10 +260,12 @@ Supported IPv4 and IPv6. Maximum length for this field is 32 characters.
 # MERCHANT_ACCOUNT
 
 Specifies the merchant account for which the transaction is to be applied. The value for the MERCHANT_ACCOUNT parameter is the merchant account sequence ID. The merchant account sequence ID can be found in the Mission Control Merchant Accounts list.
+                  
+![](https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/28026893434/original/B4gDhnvdcbRnLqoesUEF0NPLvQ4S5azvVw.png?1744226184)
 
 The MERCHANT_ACCOUNT element is optional.  If this element is omitted, the RocketGate network will assign the transaction to an appropriate account based upon the card type and a load balancing algorithm.
 
-IMPORTANT: If an account is specified with the MERCHANT_ACCOUNT parameter and the transaction is declined, the decline will not be cascaded. To allow cascading, use the PREFERRED_MERCHANT_ACCOUNT parameter.
+**IMPORTANT**: If an account is specified with the MERCHANT_ACCOUNT parameter and the transaction is declined, the decline will not be cascaded. To allow cascading, use the PREFERRED_MERCHANT_ACCOUNT parameter.
 
 # MERCHANT_CASCADED_AUTH
 
@@ -271,9 +274,9 @@ Indicator to whether include the previous 3DS authentication data in the cascade
 TRUE - Reuse the 3DS authentication data in the cascade transaction.
 FALSE - Cascade the transaction as non-3DS. This is the default behavior if the parameter is not set.
 
-This element is to be used in conjunction with the PAYMENT_LINK_TOKEN that returned from BuildPaymentLink API (simplified 3DS flow).
+This element is to be used in conjunction with the PAYMENT_LINK_TOKEN that returned from [BuildPaymentLink API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow).
 
-IMPORTANT: Merchants should leverage the presence of 3D_ECI returned on the declined transaction to determine if the 3DS authentication was successful. If 3D_ECI not present or value equal to 00, or 07 (failed 3DS), then merchants should not attempt to use this MERCHANT_CASCADED_AUTH option
+**IMPORTANT**: Merchants should leverage the presence of 3D_ECI returned on the declined transaction to determine if the 3DS authentication was successful. If 3D_ECI not present or value equal to 00, or 07 (failed 3DS), then merchants should not attempt to use this MERCHANT_CASCADED_AUTH option
 
 # MERCHANT_CUSTOMER_ID
 
@@ -357,7 +360,7 @@ Note that if the transaction contains a CARDNO value, ACCOUNT_NO value, CARD_HAS
 
 # PAYMENT_LINK_TOKEN
 
-The session ID returned from the Build Payment Link API. The parameter is used when merchants perform cascade/re-attempt after the original transaction is performed, which RocketGate will automatially populate the key transaction data, such as PAN, CVV, etc. This parameter is optional.
+The session ID returned from the [Build Payment Link API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-). The parameter is used when merchants perform cascade/re-attempt after the original transaction is performed, which RocketGate will automatially populate the key transaction data, such as PAN, CVV, etc. This parameter is optional.
 
 This parameter can also be used with MERCHANT_CASCADED_AUTH if merchants desire to pass on the 3DS data to the cascade/re-attempt transaction.
 
@@ -367,13 +370,13 @@ Set a preferred initial account for cascading. This is an optional parameter. Th
 
 If an account is sent in this parameter, the account is moved to the front of the load-balancer list. The cascade first tries the preferred merchant account, if failed, then cascade to other accounts in the load balancer.
 
-Note: The preferred account must be in the load balancer. If the account is not in the load balancer, RocketGate will use another randomly selected account from the load balance .
+Note: The preferred account **must** be in the load balancer. If the account is not in the load balancer, RocketGate will use another randomly selected account from the load balance .
 
 # PROCESSOR_3DS
 
 This argument indicates that the 3DSecure authentication is performed by the processor's MPI. This is an optional parameter.
 
-This parameter should be returned if the same param is returned in the GatewayResponse for a 3DS lookup.
+This parameter should be returned if the same param is returned in the [GatewayResponse](https://help.rocketgate.com/support/solutions/articles/28000018236-gatewayresponse) for a 3DS lookup.
 
 # REBILL_AMOUNT
 
@@ -385,7 +388,7 @@ This argument is used to indicate that the number of times to rebill before auto
 
 # REBILL_END_DATE
 
-This argument is used to indicate that the transaction is a recurring charge with a specific end date.  The argument specifies the date at which recurring billing is scheduled to terminate.  The date value must be specified in YYYY-MM-DD format.
+This argument is used to indicate that the transaction is a recurring charge with a specific end date.  The argument specifies the date at which recurring billing is scheduled to terminate.  The date value must be specified in **_YYYY-MM-DD_** format.
 
 This argument is optional.  If REBILL_END_DATE argument is omitted, rebilling will continue until it is canceled due to a customer request or billing failure, e.g. expired card.
 
@@ -415,7 +418,7 @@ Unless the REBILL_START is specified, the next rebill will be set to AUTO on the
 
 # REBILL_RESCHEDULE
 
-Used in BuildPaymentLink API (Simplified 3DS flow). When set to TRUE, it allows merchants to perform an upgrade on a subscription identified by the MERCHANT_INVOICE_ID parameter. It also revives the subscription if the subscription has been set to cancel or cancelled, the cancellation date will be cleared automatically.
+Used in [BuildPaymentLink API (Simplified 3DS flow)](https://help.rocketgate.com/support/solutions/articles/28000024349-simplified-3ds-flow-buildpaymentlink-api). When set to TRUE, it allows merchants to perform an upgrade on a subscription identified by the MERCHANT_INVOICE_ID parameter. It also revives the subscription if the subscription has been set to cancel or cancelled, the cancellation date will be cleared automatically.
 
 Also, for subscriptions that have been previously suspended, it will resume the subscriptions (similar to REBILL_RESUME).
 
@@ -451,7 +454,7 @@ Used with the PerformRebillUpdate function. When set to TRUE, it causes the subs
 
 This is the transaction identifier of the request for 3DSecure lookup. This argument is required when performing a payment after a 3DS lookup.
 
-IMPORTANT: Aside from this param, merchants should also include all other payment info (card hash, currency, amount, etc.) in the payment request. If only reference GUID is provided, RocketGate cannot perform a cascade when the transaction is declined.
+**IMPORTANT**: Aside from this param, merchants should also include all other payment info (card hash, currency, amount, etc.) in the payment request. If only reference GUID is provided, RocketGate cannot perform a cascade when the transaction is declined.
 
 # REFERENCE_SCHEME_SETTLEMENT_DATE
 
@@ -479,11 +482,11 @@ Optional. A boolean (TRUE or FALSE) that indicates whether this transaction requ
 
 Notes on usage of USE_PRIMARY_SCHEMEID:
 
-The boolean USE_PRIMARY_SCHEMEID can be used as an alternative for XsellUsePrimarySchemeID, which requires the use of the GenerateXsell.
-If USE_PRIMARY_SCHEMEID is set to TRUE, the parameters REFERENCE_SCHEME_TRANSACTION_ID and REFERENCE_SCHEME_SETTLEMENT_DATE should be provided in the request.
-REFERENCE_SCHEME_TRANSACTION_ID and REFERENCE_SCHEME_SETTLEMENT_DATE can be retrieved by using the PerformLookup method of the GatewayService API.
-The result of setting USE_PRIMARY_SCHEMEID and providing REFERENCE_SCHEME_TRANSACTION_ID and REFERENCE_SCHEME_SETTLEMENT_DATE will be the same as using the XsellUsePrimarySchemeID option and the GenerateXsell method.
-That is, RocketGate would submit the Xsell initial transaction as a rebill and replace the SchemeID of the Xsell initial transaction so that all subsequent transactions would use the same SchemeID. Note: It only applies to transactions with billing type of Initial or Trial.
+- The boolean USE_PRIMARY_SCHEMEID can be used as an alternative for [XsellUsePrimarySchemeID](https://help.rocketgate.com/support/solutions/articles/28000024998-gateway-service-xselluseprimaryschemeid), which requires the use of the GenerateXsell.
+- If USE_PRIMARY_SCHEMEID is set to TRUE, the parameters REFERENCE_SCHEME_TRANSACTION_ID and REFERENCE_SCHEME_SETTLEMENT_DATE should be provided in the request.
+  - REFERENCE_SCHEME_TRANSACTION_ID and REFERENCE_SCHEME_SETTLEMENT_DATE can be retrieved by using the [PerformLookup](https://help.rocketgate.com/support/solutions/articles/28000018238-gatewayservice) method of the [GatewayService API](https://help.rocketgate.com/support/solutions/articles/28000018238-gatewayservice).
+- The result of setting USE_PRIMARY_SCHEMEID and providing REFERENCE_SCHEME_TRANSACTION_ID and REFERENCE_SCHEME_SETTLEMENT_DATE will be the same as using the [XsellUsePrimarySchemeID](https://help.rocketgate.com/support/solutions/articles/28000024998-gateway-service-xselluseprimaryschemeid) option and the GenerateXsell method.
+  - That is, RocketGate would submit the Xsell initial transaction as a rebill and replace the SchemeID of the Xsell initial transaction so that all subsequent transactions would use the same SchemeID. Note: It only applies to transactions with billing type of Initial or Trial.
 
 # REFERRER_URL
 
@@ -499,7 +502,7 @@ If a PAN or CardHash is passed along while this parameter is TRUE, RocketGate wi
 
 When this parameter The default value is FALSE.
 
-This element is to be used in conjunction with the BuildPaymentLink API (simplified 3DS flow).
+This element is to be used in conjunction with the [BuildPaymentLink API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow).
 
 # ROUTING_NO
 
@@ -550,7 +553,7 @@ The CPF (Brazillian Tax ID) of the cardholder, is required by the processor ePag
 
 The style.css files that to be applied on RocketGate's HostedPage. This element is optional.
 
-This element is to be used in conjunction with the BuildPaymentLink API (simplified 3DS flow). This value will override the default RocketGate's CSS or pre-configured merchant option, HostedPageCSS.
+This element is to be used in conjunction with the [BuildPaymentLink API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow). This value will override the default RocketGate's CSS or pre-configured merchant option, [HostedPageCSS](https://help.rocketgate.com/support/solutions/articles/28000016240-hosted-page-hostedpagecss).
 
 # SUB_MERCHANT_ID
 
@@ -560,15 +563,15 @@ Sub Merchant ID. This is only submitted by registered Payment Facilitators.
 
 The URL to return the postback when the payment authorization is approved. This element is optional.
 
-This element is to be used in conjunction with the BuildPaymentLink API (simplified 3DS flow).
+This element is to be used in conjunction with the [BuildPaymentLink API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow).
 
-This value will override the pre-configured merchant option, HostedPagePostbackURL.
+This value will override the pre-configured merchant option, [HostedPagePostbackURL](https://help.rocketgate.com/support/solutions/articles/28000015482-hosted-page-hostedpagepostbackurl).
 
 # SUCCESS_URL
 
 Redirect URL when the payment authorization is successful. This element is optional.
 
-This element is to be used in conjunction with the BuildPaymentLink API (simplified 3DS flow).
+This element is to be used in conjunction with the [BuildPaymentLink API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow).
 
 This value will override the pre-configured merchant option, HostedPageSuccessURL.
 
@@ -578,7 +581,7 @@ Unique identification number of a transaction number to be voided, credit, or ti
 
 # TRANSACTION_TYPE
 
-The transaction type or GatewayService to be initiated. The following table lists the acceptable values for this argument:
+The transaction type or [GatewayService](https://help.rocketgate.com/support/solutions/articles/28000018238-gatewayservice) to be initiated. The following table lists the acceptable values for this argument:
 
 | Value          | Meaning                                   |
 |----------------|-------------------------------------------|
@@ -594,7 +597,7 @@ The transaction type or GatewayService to be initiated. The following table list
 | LOOKUP         | PerformLookup                             |
 | REBILL_CANCEL  | PerformRebillCancel                       |
 | REBILL_UPDATE  | PerformRebillUpdate                       |
-** The CC_PURCHASE may be overridden if the option, IovationAuthOnly, or WhiteListAuthOnly is used.
+** The CC_PURCHASE may be overridden if the option, [IovationAuthOnly](https://help.rocketgate.com/support/solutions/articles/28000003892--fraud-options-iovationauthonly), or [WhiteListAuthOnly](https://help.rocketgate.com/support/solutions/articles/28000016266-fraud-options-whitelistauthonly) is used.
 
 # THREATMETRIX_SESSION_ID
 
@@ -604,11 +607,12 @@ Session ID from ThreatMetrix Device Fingerprinting tool.
 
 JSON object contains translations to:
 
-Override the HostedPage static labels
-Populate the custom labels configured in HostedPage Vars options (Masthead, Sidebar, SidebarRight, FormWrapperPre, FormWrapperPost, Footer)
-This element is optional. It is to be used with the BuildPaymentLink API (simplified 3DS flow).
+- Override the HostedPage static labels
+- Populate the custom labels configured in HostedPage Vars options ([Masthead, Sidebar, SidebarRight, FormWrapperPre, FormWrapperPost, Footer](https://help.rocketgate.com/support/solutions/articles/28000016122-hosted-page-vars-customizing-your-hosted-purchase-page))
 
-Learn more about how to use this parameter at Hosted Page - Customize display texts for specific languages
+This element is optional. It is to be used with the [BuildPaymentLink API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow).
+
+Learn more about how to use this parameter at [Hosted Page - Customize display texts for specific languages](https://help.rocketgate.com/support/solutions/articles/28000026188-hosted-page-customize-display-texts-for-specific-languages)
 
 # UDF01
 
@@ -628,13 +632,13 @@ Customer’s username within the merchant’s internal system.  This element is 
 
 # XSELL_CUSTOMER_ID
 
-Destination/Partner customer ID. If omitted, MERCHANT_CUSTOMER_ID is used.  This element is optional and only used in the GenerateXsell function.
+Destination/Partner customer ID. If omitted, MERCHANT_CUSTOMER_ID is used.  This element is optional and only used in the **_GenerateXsell_** function.
 
 # XSELL_MERCHANT_ID
 
-Destination/Partner merchant ID. If omitted, MERCHANT_ID is used. This element is optional and only used in the GenerateXsell function.
+Destination/Partner merchant ID. If omitted, MERCHANT_ID is used. This element is optional and only used in the **_GenerateXsell_** function.
 
 # XSELL_REFERENCE_XACT
 
-Transaction ID associated with MERCHANT_CUSTOMER_ID.  This element is optional and only used in the GenerateXsell function.
+Transaction ID associated with MERCHANT_CUSTOMER_ID.  This element is optional and only used in the **_GenerateXsell_** function.
 
