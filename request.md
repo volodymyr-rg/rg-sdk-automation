@@ -20,21 +20,11 @@ This value can be omitted for void and credit transactions as well as credit car
 
 Turn on/off Address Verification.  By default, Address Verification is off.  The following table summarizes the valid values for this element.
 
-Value
-
-Meaning
-
-YES
-
-Address Verification is to be performed.
-
-NO
-
-Address Verification is not to be performed.
-
-IGNORE
-
-Perform Address Verification and return the result code, but do not take action based upon results.
+| Value  | Meaning                                                                                             |
+|--------|-----------------------------------------------------------------------------------------------------|
+| YES    | Address Verification is to be performed.                                                            |
+| NO     | Address Verification is not to be performed.                                                        |
+| IGNORE | Perform Address Verification and return the result code, but do not take action based upon results. |
 
 # BILLING_ADDRESS
 
@@ -143,17 +133,10 @@ If the parameters specified in CLONE_CUSTOMER_RECORD and/or CLONE_TO_CUSTOMER_ID
 
 Specifies the transaction type under the Credential-on-File framework. This is an optional element. The following table summarizes the valid values for this element.
 
-Value
-
-Meaning
-
-CIT
-
-Customer Initiated Transaction.
-
-MIT
-
-Merchant Initiated Transaction.
+| Value | Meaning                         |
+|-------|---------------------------------|
+| CIT   | Customer Initiated Transaction. |
+| MIT   | Merchant Initiated Transaction. |
 
 The value provided overrides the default COF flag set by RocketGate.
 
@@ -191,21 +174,11 @@ CVV2 value from a customer’s credit card.  This element is optional.
 
 Turn on/off CVV2 Verification.  This element is optional.  By default, CVV2 Verification is off.  The following table summarizes the valid values for this element.
 
-Value
-
-Meaning
-
-YES
-
-CVV2 Verification is to be performed.
-
-NO
-
-CVV2 Verification is not to be performed.
-
-IGNORE
-
-Perform CVV2 Verification and return the result code, but do not take action based upon results.
+| Value  | Meaning                                                                                          |
+|--------|--------------------------------------------------------------------------------------------------|
+| YES    | CVV2 Verification is to be performed.                                                            |
+| NO     | CVV2 Verification is not to be performed.                                                        |
+| IGNORE | Perform CVV2 Verification and return the result code, but do not take action based upon results. |
 
 # EMAIL
 
@@ -268,17 +241,10 @@ Iovation device fingerprinting black box data from ReputationShield client.  Thi
 
 Turn on/off Iovation fraud service. This element is optional.  By default, Iovation is off.  The following table summarizes the valid values for this element.
 
-Value
-
-Meaning
-
-YES
-
-Iovation fraud analysis is to be performed.
-
-NO
-
-Iovation fraud analysis is not to be performed.
+| Value | Meaning                                         |
+|-------|-------------------------------------------------|
+| YES   | Iovation fraud analysis is to be performed.     |
+| NO    | Iovation fraud analysis is not to be performed. |
 
 # IOVATION_RULE
 
@@ -431,34 +397,14 @@ When used with PerformRebillCancel(), setting REBILL_END_DATE=NOW will set the c
 
 This argument is used to indicate that the transaction is a recurring charge.  The argument specifies the frequency of the recurring charges.  The following table summarizes the valid values for this argument. This argument is optional. A numeric value specifies the frequency of rebilling in DAYS (For example rebill-freq=7 would specify a subscription that would renew every 7 days).
 
-Value
-
-Meaning
-
-MONTHLY
-
-Rebilling occurs once per month
-
-QUARTERLY
-
-Rebilling occurs once per quarter, i.e. 3 months
-
-SEMI- ANNUALLY
-
-Rebilling occurs semi-annually, i.e. 6 months
-
-ANNUALLY
-
-Rebilling occurs annually
-
-LIFE
-
-Lifetime Membership
-
-Numeric Value
-
-Rebilling occurs once per # of days specified. Max value 1,095
-
+| Value         | Meaning                                                        |
+|---------------|----------------------------------------------------------------|
+| MONTHLY       | Rebilling occurs once per month                                |
+| QUARTERLY     | Rebilling occurs once per quarter, i.e. 3 months               |
+| SEMI-ANNUALLY | Rebilling occurs semi-annually, i.e. 6 months                  |
+| ANNUALLY      | Rebilling occurs annually                                      |
+| LIFE          | Lifetime Membership                                            |
+| Numeric Value | Rebilling occurs once per # of days specified. Max value 1,095 |
 # REBILL_REACTIVATE
 
 Used with the PerformRebillUpdate function. When set to TRUE, it reactivates the last cancelled subscription identified by the given customer ID (MERCHANT_CUSTOMER_ID) and invoice ID (MERCHANT_INVOICE_ID). Thus, the customer ID and Invoice ID are compulsory parameters.
@@ -483,21 +429,11 @@ If the transaction is a recurring charge, this argument specifies the number of 
 
 The REBILL_START parameter determines when the next rebill operation will be performed. Following is a list of valid values and behavior.
 
-Value
-
-Meaning
-
-AUTO
-
-Causes rebilling to be scheduled as an offset from the current day. For example, if a membership is scheduled for monthly billing, the next rebill will occur one month from the current day, i.e. the day the REBILL_RESUME is executed.
-
-TODAY or NOW
-
-Causes the next rebilling to be executed immediately.
-
-Numeric value
-
-Causes rebilling to be scheduled “X” number of days from the current day. For example, if the value 5 is provided, the next rebill will occur 5 days from the current day.
+| Value         | Meaning                                                                                                                                                                                                                                   |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| AUTO          | Causes rebilling to be scheduled as an offset from the current day. For example, if a membership is scheduled for monthly billing, the next rebill will occur one month from the current day, i.e. the day the REBILL_RESUME is executed. |
+| TODAY or NOW  | Causes the next rebilling to be executed immediately.                                                                                                                                                                                     |
+| Numeric value | Causes rebilling to be scheduled "X" number of days from the current day. For example, if the value 5 is provided, the next rebill will occur 5 days from the current day.                                                                |
 
 If the REBILL_START parameter is omitted, the rescheduling defaults to AUTO.
 
@@ -573,17 +509,10 @@ Customer’s checking/savings routing number used in ACH transactions.
 
 Boolean value that indicates if this account is a Checking or Savings account. Default value is FALSE.
 
-Value
-
-Meaning
-
-FALSE
-
-Account is a Checking Account
-
-TRUE
-
-Account is a Savings Account
+| Value | Meaning                       |
+|-------|-------------------------------|
+| FALSE | Account is a Checking Account |
+| TRUE  | Account is a Savings Account  |
 
 # SCRUB
 
@@ -593,21 +522,11 @@ SCRUB element takes precedence over SCRUB_ACTIVITY, SCRUB_NEGDB, and SCRUB_PROFI
 
 By default, fraud scrubbing is not performed.  The following table summarizes the valid values for this element.
 
-Value
-
-Meaning
-
-YES
-
-Fraud scrubbing is to be performed.
-
-NO
-
-Fraud scrubbing is not to be performed.
-
-IGNORE
-
-Perform fraud scrubbing and return the result code, but do not take action based upon results.
+| Value  | Meaning                                                                                        |
+|--------|------------------------------------------------------------------------------------------------|
+| YES    | Fraud scrubbing is to be performed.                                                            |
+| NO     | Fraud scrubbing is not to be performed.                                                        |
+| IGNORE | Perform fraud scrubbing and return the result code, but do not take action based upon results. |
 
 # SCRUB_ACTIVITY
 
@@ -661,32 +580,20 @@ Unique identification number of a transaction number to be voided, credit, or ti
 
 The transaction type or GatewayService to be initiated. The following table lists the acceptable values for this argument:
 
-Value	Meaning
-CC_AUTH
-PerformAuthOnly
-CC_TICKET
-PerformTicket
-CC_PURCHASE **
-PerformPurchase (includes an ACH Payment)
-CC_CONFIRM
-PerformConfirmation
-CC_CREDIT
-PerformCredit
-CC_VOID
-PerformVoid
-CARDUPLOAD
-PerformCardUpload
-CARDSCRUB
-PerformCardScrub
-GENERATEXSELL
-GenerateXsell
-LOOKUP
-PerformLookup
-REBILL_CANCEL
-PerformRebillCancel
-REBILL_UPDATE
-PerformRebillUpdate
-
+| Value          | Meaning                                   |
+|----------------|-------------------------------------------|
+| CC_AUTH        | PerformAuthOnly                           |
+| CC_TICKET      | PerformTicket                             |
+| CC_PURCHASE ** | PerformPurchase (includes an ACH Payment) |
+| CC_CONFIRM     | PerformConfirmation                       |
+| CC_CREDIT      | PerformCredit                             |
+| CC_VOID        | PerformVoid                               |
+| CARDUPLOAD     | PerformCardUpload                         |
+| CARDSCRUB      | PerformCardScrub                          |
+| GENERATEXSELL  | GenerateXsell                             |
+| LOOKUP         | PerformLookup                             |
+| REBILL_CANCEL  | PerformRebillCancel                       |
+| REBILL_UPDATE  | PerformRebillUpdate                       |
 ** The CC_PURCHASE may be overridden if the option, IovationAuthOnly, or WhiteListAuthOnly is used.
 
 # THREATMETRIX_SESSION_ID
