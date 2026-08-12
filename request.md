@@ -654,4 +654,3 @@ Destination/Partner merchant ID. If omitted, MERCHANT_ID is used. This element i
 # XSELL_REFERENCE_XACT
 
 Transaction ID associated with MERCHANT_CUSTOMER_ID.  This element is optional and only used in the **_GenerateXsell_** function.
-
