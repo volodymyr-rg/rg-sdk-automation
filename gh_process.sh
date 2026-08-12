@@ -84,14 +84,15 @@ inject() {
 
   run() {
     local file="$1"
+    local dataFile="$2"
+    local startMarker="$3"
+    local endMarker="$4"
+
     echo "Processing $file ..."
 #    echo ---------------
 #    cat "$TARGET/$file"
 #    echo ---------------
-    "$JAVA" -cp "$SRC" rg_sdk_updater.Injector \
-      '--- start response constants ---' \
-      '--- end response constants ---' \
-      "$SRC/response.md" \
+    "$JAVA" -cp "$SRC" rg_sdk_updater.Injector "$startMarker" "$endMarker" "$SRC/$dataFile" \
       "$TARGET/$file" > /tmp/delme
     cat /tmp/delme
     mv /tmp/delme "$TARGET/$file"
@@ -100,9 +101,11 @@ inject() {
   compiled
 
   if [[ $target_repo == *php* ]]; then
-    run 'src/GatewayResponse.php'
+    run 'src/GatewayRequest.php'  'request.md'  '--- start request constants ---'  '--- end request constants ---'
+    run 'src/GatewayResponse.php' 'response.md' '--- start response constants ---' '--- end response constants ---'
   elif [[ $target_repo == *python* ]]; then
-    run 'RocketGate.py'
+    run 'RocketGate.py' 'request.md'  '--- start request constants ---'  '--- end request constants ---'
+    run 'RocketGate.py' 'response.md' '--- start response constants ---' '--- end response constants ---'
   else
     die "unsupported target repository type: ${target_repo}"
   fi
