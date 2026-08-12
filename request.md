@@ -549,7 +549,19 @@ Customer’s last 4 digits of Social Security number used in ACH transactions.
 
 The CPF (Brazillian Tax ID) of the cardholder, is required by the processor ePag/Letpay. It can also be used with the SolidGate and Unlimint processor if merchants are using their Brazilian processing.
 
-# STYLE_SHEET, STYLE_SHEET2, STYLE_SHEET3
+# STYLE_SHEET
+
+The style.css files that to be applied on RocketGate's HostedPage. This element is optional.
+
+This element is to be used in conjunction with the [BuildPaymentLink API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow). This value will override the default RocketGate's CSS or pre-configured merchant option, [HostedPageCSS](https://help.rocketgate.com/support/solutions/articles/28000016240-hosted-page-hostedpagecss).
+
+# STYLE_SHEET2
+
+The style.css files that to be applied on RocketGate's HostedPage. This element is optional.
+
+This element is to be used in conjunction with the [BuildPaymentLink API](https://help.rocketgate.com/support/solutions/articles/28000024349-build-payment-link-api-simplified-3ds-flow-) (simplified 3DS flow). This value will override the default RocketGate's CSS or pre-configured merchant option, [HostedPageCSS](https://help.rocketgate.com/support/solutions/articles/28000016240-hosted-page-hostedpagecss).
+
+# STYLE_SHEET3
 
 The style.css files that to be applied on RocketGate's HostedPage. This element is optional.
 
